@@ -1,4 +1,70 @@
 $(document).ready(function () {
+  let abi = [
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: false,
+          internalType: "address",
+          name: "_vi",
+          type: "address",
+        },
+        {
+          indexed: false,
+          internalType: "string",
+          name: "_id",
+          type: "string",
+        },
+      ],
+      name: "SM_ban_data",
+      type: "event",
+    },
+    {
+      inputs: [
+        {
+          internalType: "string",
+          name: "_id",
+          type: "string",
+        },
+      ],
+      name: "DangKy",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
+      ],
+      name: "arrHocVien",
+      outputs: [
+        {
+          internalType: "string",
+          name: "_ID",
+          type: "string",
+        },
+        {
+          internalType: "address",
+          name: "_VI",
+          type: "address",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+  ];
+  let addressSM = "0xF44F0CFFf08344a2a753603DfC01c21e11320308";
+
+  let web3 = new Web3(window.ethereum);
+  window.ethereum.enable();
+
+  let contract_MM = new web3.eth.Contract(abi, addressSM);
+  console.log(contract_MM);
+
   let currentAccount = "";
   checkMM();
 
@@ -22,7 +88,15 @@ $(document).ready(function () {
         SoDT: $("#txtSoDT").val(),
       },
       function (data) {
-        console.log(data);
+        if (currentAccount.length == 0) {
+          alert("Vui long dang nhap MM!");
+        } else {
+          if (data.ketqua == 1) {
+            contract_MM.methods.DangKy(data.maloi._id).send({
+              from: currentAccount,
+            });
+          }
+        }
       }
     );
   });
