@@ -62,8 +62,33 @@ $(document).ready(function () {
   let web3 = new Web3(window.ethereum);
   window.ethereum.enable();
 
+  //Tao contract cho MM
   let contract_MM = new web3.eth.Contract(abi, addressSM);
   console.log(contract_MM);
+
+  //Tao contract cho Infura
+  let provider = new Web3.providers.WebsocketProvider(
+    "wss://rinkeby.infura.io/ws/v3/167816f144f844668a1693fb485b16f3"
+  );
+  let web3_infura = new Web3(provider);
+  let contract_infura = web3_infura.eth.Contract(abi, addressSM);
+  console.log(contract_infura);
+  contract_infura.events.SM_ban_data(
+    { filter: {}, fromBlock: "latest" },
+    function (error, data) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        $("#tbDS").append(`
+        <tr class="row">
+          <td>`+data.returnValues[0]+`</td>
+          <td>`+data.returnValues[1]+`</td>
+        </tr>
+        `);
+      }
+    }
+  );
 
   let currentAccount = "";
   checkMM();

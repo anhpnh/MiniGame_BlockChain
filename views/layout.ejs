@@ -10,6 +10,24 @@
     <script src="./scripts/web3.js"></script>
     <script src="./process.js"></script>
     <title>MiniGame</title>
+    <style>
+        #formDangKy,
+        #danhsach {
+            background-color: antiquewhite;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #tbDS {
+            width: 90%;
+        }
+
+        #dong1 td, .row {
+            text-align: center;
+            padding: 4px;
+            border-bottom: solid 1px cornflowerblue;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,6 +40,14 @@
         <input id="txtEmail" type="text" placeholder="Email" />
         <input id="txtSoDT" type="text" placeholder="Dien Thoai" />
         <button id="btnDangKy">Dang Ky</button>
+    </div>
+    <div id="danhsach">
+        <table id="tbDS">
+            <tr id="dong1">
+                <td>Address</td>
+                <td>_ID</td>
+            </tr>
+        </table>
     </div>
 </body>
 
