@@ -15,7 +15,7 @@ app.use(
 
 let server = require("http").Server(app);
 let io = require("socket.io")(server);
-server.listen(3000);
+server.listen(process.env.PORT ||3000);
 
 let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
